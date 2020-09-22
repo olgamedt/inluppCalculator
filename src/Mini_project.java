@@ -30,10 +30,15 @@ public class Mini_project {
 
         double answer = r + h;
         System.out.printf("Sum of %d + %d = %.1f%n", r, h, answer);
+
         try {
+
             Thread.sleep(2000);
+
         } catch (InterruptedException e) {
+
             e.printStackTrace();
+
         }
 
         return answer;
@@ -54,17 +59,14 @@ public class Mini_project {
                 value = in.nextInt();
                 isNumber = false;
             }
-            else{
+            else {
                 System.out.println("Only numbers");
                 isNumber = true;
                 in.next();
                 in.reset();
             }
 
-
         } while (isNumber);
-
-
 
         return value;
     }
