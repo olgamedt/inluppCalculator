@@ -7,7 +7,7 @@ public class Mini_project {
     public static boolean isNumber;
 
 
-    public static void menu(){
+    public static void menu() {
 
         System.out.println("What do you want to calculate? Press 1-5 or 0 to quit.\n");
 
@@ -26,64 +26,58 @@ public class Mini_project {
     }
 
 
-    public static double sum(double r, double h){
+    public static double sum(int r, int h) {
 
         double answer = r + h;
-
-        return answer;
-
-    }
-
-    public static void methodToSum(){
-
-        do{
-
-
-            System.out.print("Give me 2 numbers to sum\n" +
-                    "Number 1: \t\n");
-
-
-            if (in.hasNextDouble()) {
-                double number1 = in.nextDouble();
-                System.out.print("Number 2: \t\n");
-                if(in.hasNextDouble()) {
-                    double number2 = in.nextDouble();
-                    System.out.printf("Sum of %.1f + %.1f = %.1f%n", number1, number2, sum(number1, number2));
-                    isNumber = false;
-
-                }
-            }
-            else{
-                System.out.println("Only numbers!");
-                isNumber = true;
-                in.next();
-                in.reset();
-
-            }
-
-
-        } while(isNumber);
-
+        System.out.printf("Sum of %d + %d = %.1f%n", r, h, answer);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        return answer;
+
+    }
+
+    public static int getValue(){
+
+        isNumber = true;
+
+        int value = 0;
+
+        do{
+
+            System.out.print("Give me a number: ");
+
+            if(in.hasNextInt()){
+                value = in.nextInt();
+                isNumber = false;
+            }
+            else{
+                System.out.println("Only numbers");
+                isNumber = true;
+                in.next();
+                in.reset();
+            }
+
+
+        } while (isNumber);
+
+
+
+        return value;
     }
 
 
 
-    public static void main(String[] args)  {
-
+    public static void main(String[] args) {
 
 
         boolean quit = false;
 
 
-
-
-
-        while(!quit){
+        while (!quit) {
 
             menu();
             String choice = in.next();
@@ -102,7 +96,7 @@ public class Mini_project {
                     //do something
                     break;
                 case "4":
-                    methodToSum();
+                    sum(getValue(), getValue());
                     break;
                 case "5":
                     //do something
