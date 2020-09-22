@@ -3,13 +3,15 @@ import java.util.Scanner;
 
 public class Mini_project {
 
-    public static Scanner in = new Scanner(System.in);
-    public static boolean isNumber;
+    private static Scanner in = new Scanner(System.in);
+    private static boolean isNumber;
+    private static boolean quit;
+    private static final double pie = 3.14285714286;
 
 
     public static void menu() {
 
-        System.out.println("What do you want to calculate? Press 1-5 or 0 to quit.\n");
+        System.out.println("\nWhat do you want to calculate? Press 1-5 or 0 to quit.\n");
 
         System.out.println("1. Volume of Sphere");
 
@@ -26,41 +28,41 @@ public class Mini_project {
     }
 
 
-    public static double sum(int r, int h) {
-
-        double answer = r + h;
-        System.out.printf("Sum of %d + %d = %.1f%n", r, h, answer);
+    public static void sleep(int r){
 
         try {
 
-            Thread.sleep(2000);
+            Thread.sleep(r);
 
         } catch (InterruptedException e) {
 
             e.printStackTrace();
 
         }
-
-        return answer;
-
     }
 
-    public static int getValue(){
+
+    public static double sum(int r, int h) {
+
+        double answer = r + h;
+
+        return answer;
+    }
+
+    public static int getValue() {
 
         isNumber = true;
 
-        int value = 0;
-
-        do{
+        do {
 
             System.out.print("Give me a number: ");
 
-            if(in.hasNextInt()){
-                value = in.nextInt();
+            if (in.hasNextInt()) {
+                int value = in.nextInt();
                 isNumber = false;
-            }
-            else {
-                System.out.println("Only numbers");
+                return value;
+            } else {
+                System.out.println("Only integers!");
                 isNumber = true;
                 in.next();
                 in.reset();
@@ -68,16 +70,36 @@ public class Mini_project {
 
         } while (isNumber);
 
-        return value;
+        return 1;
     }
 
 
+    public static double volumeOfSphere(int r) {
+
+        double sphere = (4 / 3) * pie * (r * r * r);
+        return sphere;
+    }
+
+    public static double volumeOfCylinder(int r, int h) {
+
+        double cylinder = pie * ((r * r) * h);
+        return cylinder;
+    }
+
+    public static double calcPoint(int k, int x, int m){
+
+        double calcPoint = k * x + m;
+        return calcPoint;
+
+    }
+
+    public static String fraction(int numerator, int denominator){
+
+    }
 
     public static void main(String[] args) {
 
-
-        boolean quit = false;
-
+        quit = false;
 
         while (!quit) {
 
@@ -88,34 +110,47 @@ public class Mini_project {
             switch (choice) {
 
                 case "1":
-                    System.out.println("Choice 1");
+                    int radius = getValue();
+                    double sphere = volumeOfSphere(radius);
+                    System.out.printf("The volume of Sphere with the radius %d is %.2f cm3%n", radius, sphere);
+                    sleep(1500);
                     break;
                 case "2":
-                    //do something
-                    System.out.println("choice 2");
+                    int radius1 = getValue();
+                    int height = getValue();
+                    double cylinder = volumeOfCylinder(radius1, height);
+                    System.out.printf("The volume of Cylinder with the radius %d and height of %d is %.2f cm3%n", radius1, height, cylinder);
+                    sleep(1500);
                     break;
                 case "3":
                     //do something
                     break;
                 case "4":
-                    sum(getValue(), getValue());
+                    int r = getValue();
+                    int h = getValue();
+                    double a = sum(r, h);
+                    System.out.printf("Sum of %d + %d = %.0f%n", r, h, a);
+                    sleep(2000);
                     break;
                 case "5":
-                    //do something
+                    int k = getValue();
+                    int x = getValue();
+                    int m = getValue();
+                    double b = calcPoint(k, x, m);
+                    System.out.printf("y = %d * %d + %d %ny = %.0f%n", k, x, m, b);
+                    sleep(2000);
                     break;
                 case "0":
                     quit = true;
                     System.out.println("Quitting, Thank you!");
+                    sleep(500);
                     System.exit(1);
-
                     break;
                 default:
                     System.out.println("Invalid choice, only numbers!");
                     break;
 
             }
-
-
         }
 
 
